@@ -1,0 +1,16 @@
+"Kabupaten/Kota","KMeans_Cluster","HCluster","DBSCAN_Cluster","Fuzzy_Cluster"
+"Lampung Barat",1,1,0,1
+"Tanggamus",1,1,0,4
+"Lampung Selatan",4,2,0,2
+"Lampung Timur",2,3,0,2
+"Lampung Tengah",4,2,0,2
+"Lampung Utara",4,2,0,2
+"Way Kanan",2,3,0,4
+"Tulangbawang",1,1,1,4
+"Pesawaran",1,1,1,4
+"Pringsewu",1,1,0,4
+"Mesuji",1,1,1,1
+"Tulang Bawang Barat",1,1,1,1
+"Pesisir Barat",1,1,1,1
+"Kota Bandar Lampung",3,4,0,3
+"Kota Metro",1,1,0,1
