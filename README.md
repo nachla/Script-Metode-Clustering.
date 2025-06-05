@@ -1,115 +1,113 @@
-````markdown
-# **Analisis Klaster Tenaga Kesehatan - Dataset ANMUL**
+Analisis Klaster Tenaga Kesehatan di Lampung
+Deskripsi
+Proyek ini berisi kode R untuk melakukan analisis klaster terhadap data tenaga kesehatan di berbagai kabupaten/kota di Provinsi Lampung dari tahun 2020 hingga 2024. Analisis ini menggunakan beberapa metode klastering, yaitu K-Means, Hierarchical Clustering, DBSCAN, dan Fuzzy C-Means, untuk mengelompokkan kabupaten/kota berdasarkan jumlah tenaga kesehatan di berbagai kategori (perawat, bidan, tenaga kefarmasian, tenaga kesehatan masyarakat, tenaga kesehatan lingkungan, dan tenaga gizi).
+Kode ini juga menghasilkan visualisasi seperti boxplot, heatmap korelasi, plot PCA, elbow plot, dendrogram, dan silhouette plot untuk membantu memahami distribusi data dan hasil klastering. Selain itu, kode menyediakan statistik deskriptif dan ringkasan klaster untuk setiap metode.
+Prasyarat
+Pastikan Anda memiliki perangkat lunak dan paket R berikut terinstal:
 
-## **Deskripsi Proyek**
-Proyek ini bertujuan untuk melakukan analisis klaster terhadap data tenaga kesehatan di beberapa kabupaten/kota di Indonesia menggunakan berbagai metode klastering. Metode yang digunakan meliputi:
-- K-Means
-- Hierarchical Clustering
-- DBSCAN
-- Fuzzy C-Means
-
-Analisis dilakukan berdasarkan beberapa kategori tenaga kesehatan, seperti perawat, bidan, tenaga kefarmasian, tenaga kesehatan masyarakat, tenaga kesehatan lingkungan, dan tenaga gizi, selama periode 2020-2024. Data ini dianalisis per tahun serta seluruh tahun secara keseluruhan.
-
-## **Tujuan**
-1. Mengelompokkan kabupaten/kota berdasarkan data tenaga kesehatan menggunakan teknik klastering.
-2. Menyediakan visualisasi analisis klaster menggunakan boxplot, heatmap korelasi, PCA plot, dan grafik klaster.
-3. Menghitung dan memvisualisasikan hasil klaster menggunakan metrik seperti Silhouette Score.
-
-## **Persyaratan**
-Pastikan Anda memiliki semua paket R berikut yang digunakan dalam proyek ini:
-```R
-library(readxl)
-library(ggplot2)
-library(cluster)
-library(factoextra)
-library(dbscan)
-library(e1071)
-library(tidyr)
-library(dplyr)
-library(corrplot)
-library(psych)
-````
-
-## **Deskripsi Dataset**
-
-Dataset yang digunakan adalah file Excel yang berisi data mengenai jumlah tenaga kesehatan di berbagai kabupaten/kota. Kolom-kolom utama dalam dataset meliputi:
-
-* `Kabupaten/Kota`: Nama kabupaten/kota
-* `Year`: Tahun data (2020-2024)
-* `Tenaga Kesehatan - Perawat`, `Tenaga Kesehatan - Bidan`, dll.: Jumlah tenaga kesehatan dalam berbagai kategori.
-
-## **Langkah-langkah Analisis**
-
-1. **Membaca dan Memproses Data**
-
-   * Membaca dataset dari file Excel.
-   * Menghapus baris yang tidak relevan (misalnya: data untuk "Lampung").
-   * Menangani nilai yang hilang dengan mengisi nilai missing dengan rata-rata kolom.
-
-2. **Statistik Deskriptif dan Visualisasi**
-
-   * Menghitung statistik deskriptif seperti mean, median, min, max, dan standar deviasi.
-   * Membuat visualisasi berupa boxplot dan heatmap korelasi untuk memahami distribusi data.
-
-3. **Pra-Pemrosesan dan Normalisasi**
-
-   * Data dinormalisasi menggunakan metode `scale()` agar lebih cocok untuk analisis klaster.
-
-4. **PCA (Principal Component Analysis)**
-
-   * Menggunakan PCA untuk mereduksi dimensi data dan memvisualisasikan data dalam 2D.
-
-5. **Analisis Klaster**
-
-   * **K-Means Clustering**: Menentukan jumlah klaster optimal menggunakan metode Elbow, dan menghitung silhouette score untuk menilai kualitas klaster.
-   * **Hierarchical Clustering**: Membuat dendrogram untuk memvisualisasikan struktur klaster.
-   * **DBSCAN**: Menggunakan DBSCAN untuk mendeteksi klaster dengan densitas tinggi dan outlier.
-   * **Fuzzy C-Means**: Menggunakan metode Fuzzy C-Means untuk klasterisasi dengan kemungkinan keanggotaan lebih dari satu klaster.
-
-6. **Visualisasi Klaster**
-
-   * Menyediakan visualisasi klaster untuk setiap metode (K-Means, Hierarchical, DBSCAN, Fuzzy C-Means) menggunakan PCA.
-   * Menyimpan hasil visualisasi dalam format PNG.
-
-7. **Hasil dan Ringkasan**
-
-   * Menyimpan hasil klasterisasi dan ringkasan klaster dalam file CSV untuk analisis lebih lanjut.
-   * Menampilkan daerah-daerah yang termasuk dalam setiap klaster untuk setiap metode klastering.
-
-## **File yang Dihasilkan**
-
-1. **Visualisasi**:
-
-   * Boxplot distribusi tenaga kesehatan.
-   * Heatmap korelasi antar kategori tenaga kesehatan.
-   * Plot PCA untuk visualisasi data.
-   * Elbow plot untuk memilih jumlah klaster optimal.
-   * Silhouette plots untuk menilai kualitas klaster.
-   * Dendrogram untuk hierarchical clustering.
-   * Visualisasi klaster untuk K-Means, Hierarchical, DBSCAN, dan Fuzzy C-Means.
-
-2. **Ringkasan Klaster**:
-
-   * Hasil klasterisasi disimpan dalam file CSV, termasuk informasi tentang daerah yang termasuk dalam setiap klaster serta metrik silhouette untuk masing-masing metode.
-
-3. **Output CSV**:
-
-   * `cluster_assignments_{period}.csv`: Menyimpan penugasan klaster untuk setiap kabupaten/kota.
-   * `ringkasan_klaster_{period}.csv`: Menyimpan ringkasan statistik klaster (mean, jumlah, dan silhouette score).
-
-## **Cara Penggunaan**
-
-1. **Persiapkan Data**: Letakkan file Excel yang berisi data di lokasi yang sesuai dengan path `C:/Users/nachla/ANMUL/DATASET ANMUL KEL 3.xlsx`.
-2. **Jalankan Script**: Jalankan script di RStudio atau R terminal dengan paket yang telah diinstal.
-3. **Analisis Klaster**: Script ini secara otomatis akan melakukan analisis klaster per tahun (2020-2024) serta analisis untuk seluruh data tahun tersebut.
-4. **Cek Output**: Cek folder kerja Anda untuk hasil visualisasi dan file CSV yang dihasilkan.
-
-## **Hasil yang Diharapkan**
-
-* Analisis klaster berdasarkan kategori tenaga kesehatan.
-* Visualisasi yang jelas tentang distribusi data dan klaster yang terbentuk.
-* Menyediakan wawasan tentang pola-pola distribusi tenaga kesehatan di berbagai kabupaten/kota.
+R (versi 3.6 atau lebih baru)
+RStudio (opsional, untuk antarmuka yang lebih nyaman)
+Paket R:install.packages(c("readxl", "ggplot2", "cluster", "factoextra", "dbscan", "e1071", "tidyr", "dplyr", "corrplot", "psych"))
 
 
 
+Struktur File
 
+clustering_analysis.R: Kode utama untuk analisis klaster.
+DATASET ANMUL KEL 3.xlsx: File data input (tidak disertakan di repositori; pastikan Anda memiliki file ini di direktori yang sesuai).
+File output (dihasilkan oleh kode):
+boxplot_*.png: Boxplot distribusi tenaga kesehatan.
+corrplot_*.png: Heatmap korelasi antar variabel.
+pca_plot_*.png: Plot PCA untuk visualisasi data.
+elbow_plot_*.png: Elbow plot untuk menentukan jumlah klaster optimal (K-Means).
+dendrogram_*.png: Dendrogram untuk hierarchical clustering.
+silhouette_*.png: Silhouette plot untuk setiap metode klastering.
+cluster_*.png: Visualisasi hasil klastering menggunakan PCA.
+knn_plot_*.png: Plot jarak kNN untuk DBSCAN.
+cluster_assignments_*.csv: File CSV berisi penugasan klaster untuk setiap kabupaten/kota.
+ringkasan_klaster_*.csv: File CSV berisi ringkasan statistik klaster.
+
+
+
+Cara Menjalankan
+
+Siapkan Data:
+
+Pastikan file DATASET ANMUL KEL 3.xlsx tersedia di direktori yang benar (misalnya, C:/Users/nachla/ANMUL/DATASET ANMUL KEL 3.xlsx). Sesuaikan path file di kode jika perlu.
+Format data harus memiliki kolom: Kabupaten/Kota, Year, dan kolom tenaga kesehatan (Perawat, Bidan, Tenaga Kefarmasian, Tenaga Kesehatan Masyarakat, Tenaga Kesehatan Lingkungan, Tenaga Gizi).
+
+
+Jalankan Kode:
+
+Buka file clustering_analysis.R di R atau RStudio.
+Pastikan semua paket yang diperlukan sudah terinstal.
+Jalankan kode secara keseluruhan atau per baris untuk melihat hasilnya.
+Kode akan menghasilkan analisis untuk setiap tahun (2020-2024) dan untuk seluruh periode data.
+
+
+Output:
+
+Visualisasi akan disimpan sebagai file PNG di direktori kerja Anda.
+File CSV berisi penugasan klaster dan ringkasan klaster akan disimpan untuk setiap periode analisis.
+Statistik deskriptif dan silhouette score akan ditampilkan di konsol.
+
+
+
+Penjelasan Kode
+Kode ini terdiri dari beberapa bagian utama:
+
+Pemuatan dan Pembersihan Data:
+
+Membaca file Excel menggunakan readxl.
+Memilih kolom yang relevan dan menghapus baris total "Lampung".
+Menangani missing values dengan mengisi rata-rata per kolom.
+
+
+Fungsi perform_clustering:
+
+Melakukan analisis klaster untuk periode tertentu (per tahun atau seluruh tahun).
+Menghasilkan statistik deskriptif, visualisasi (boxplot, heatmap, PCA, dll.), dan hasil klastering menggunakan K-Means, Hierarchical Clustering, DBSCAN, dan Fuzzy C-Means.
+Menyimpan hasil visualisasi dan ringkasan ke file.
+
+
+Analisis per Tahun dan Seluruh Periode:
+
+Kode menjalankan analisis klaster untuk setiap tahun (2020-2024) dan untuk seluruh data secara keseluruhan.
+
+
+
+Contoh Output
+
+Statistik Deskriptif: Mean, median, min, max, dan standar deviasi untuk setiap kategori tenaga kesehatan.
+Visualisasi:
+Boxplot menunjukkan distribusi jumlah tenaga kesehatan.
+Heatmap korelasi menunjukkan hubungan antar variabel.
+Plot PCA untuk visualisasi data dalam ruang dua dimensi.
+Elbow plot untuk menentukan jumlah klaster optimal (K-Means).
+Dendrogram untuk hierarchical clustering.
+Silhouette plot untuk mengevaluasi kualitas klaster.
+
+
+Penugasan Klaster: Daftar kabupaten/kota dalam setiap klaster untuk setiap metode.
+Ringkasan Klaster: Statistik rata-rata per kategori tenaga kesehatan per klaster dan silhouette score.
+
+Catatan
+
+Kode ini menggunakan set.seed(123) untuk memastikan reproduktibilitas hasil klastering.
+Parameter DBSCAN (eps dan minPts) diatur secara manual. Anda mungkin perlu menyesuaikan nilai ini berdasarkan plot kNN yang dihasilkan.
+Pastikan direktori kerja Anda memiliki izin untuk menyimpan file output (PNG dan CSV).
+Jika terjadi masalah dengan perangkat grafis (misalnya, error di corrplot atau ggsave), kode sudah dilengkapi dengan penanganan error untuk memastikan eksekusi tetap berjalan.
+
+Kontribusi
+Jika Anda ingin berkontribusi pada proyek ini:
+
+Fork repositori ini.
+Buat branch baru untuk perubahan Anda (git checkout -b feature/nama-fitur).
+Commit perubahan Anda (git commit -m "Menambahkan fitur X").
+Push ke branch Anda (git push origin feature/nama-fitur).
+Buat pull request untuk ditinjau.
+
+Lisensi
+Proyek ini dilisensikan di bawah MIT License. Silakan gunakan dan modifikasi sesuai kebutuhan, dengan tetap memberikan kredit kepada penulis asli.
+Kontak
+Untuk pertanyaan atau dukungan, silakan buka isu di repositori ini atau hubungi melalui email (jika disediakan oleh kontributor).
