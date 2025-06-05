@@ -9,7 +9,7 @@ library(dplyr)
 library(corrplot)
 library(psych)
 
-data <- read_excel("C:/Users/nachla/ANMUL/DATASET ANMUL KEL 3.xlsx")
+data <- read_excel("C:/Users/DATASET ANMUL KEL 3.xlsx")
 
 # Membersihkan data: pilih kolom yang relevan dan hapus baris total "Lampung"
 data <- data %>%
