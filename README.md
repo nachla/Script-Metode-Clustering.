@@ -31,7 +31,7 @@ Pastikan Anda memiliki perangkat lunak dan paket R berikut terinstal:
 
 ## Cara Menjalankan
 1. **Siapkan Data**:
-   - Pastikan file `DATASET ANMUL KEL 3.xlsx` tersedia di direktori yang benar (misalnya, `C:/Users/nachla/ANMUL/DATASET ANMUL KEL 3.xlsx`). Sesuaikan path file di kode jika perlu.
+   - Pastikan file `DATASET ANMUL KEL 3.xlsx` tersedia di direktori yang benar (misalnya, `C:/Users/DATASET ANMUL KEL 3.xlsx`). Sesuaikan dengan path data kalian dengan cara copy path.
    - Format data harus memiliki kolom: `Kabupaten/Kota`, `Year`, dan kolom tenaga kesehatan (Perawat, Bidan, Tenaga Kefarmasian, Tenaga Kesehatan Masyarakat, Tenaga Kesehatan Lingkungan, Tenaga Gizi).
 
 2. **Jalankan Kode**:
